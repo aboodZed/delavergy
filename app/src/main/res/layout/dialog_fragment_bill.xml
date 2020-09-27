@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dark_bottom_shape"
+    android:orientation="vertical"
+    android:padding="@dimen/medium_margin"
+    tools:context=".utils.dialog.BillDialogFragment">
+
+    <TextView
+        style="@style/mediumTextViewStyle"
+        android:text="@string/delivery_value" />
+
+    <TextView
+        android:id="@+id/tv_value"
+        style="@style/LargeTextViewStyle"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:textColor="@color/reject"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/tv_attainment"
+        style="@style/BlackButtonStyle"
+        android:text="@string/attainment_complete"
+        android:textStyle="bold" />
+
+</LinearLayout>

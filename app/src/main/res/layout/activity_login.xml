@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:paddingStart="@dimen/margin"
+    android:paddingEnd="@dimen/margin"
+    tools:context=".feature.login.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_img" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputStyle"
+            android:layout_marginTop="@dimen/xlarge_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:hint="@string/phone_number">
+
+            <EditText
+                android:id="@+id/et_phone"
+                style="@style/EditTextStyle"
+                android:inputType="phone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputStyle"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:hint="@string/password">
+
+            <EditText
+                android:id="@+id/et_password"
+                style="@style/EditTextStyle"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/DarkButtonStyle"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:text="@string/login" />
+
+        <Button
+            android:id="@+id/btn_password_recovery"
+            style="@style/BlackButtonStyle"
+            android:text="@string/password_recovery" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

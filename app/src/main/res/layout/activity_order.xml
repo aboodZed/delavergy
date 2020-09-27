@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:orientation="vertical"
+    tools:context=".feature.order.OrderActivity">
+
+    <include layout="@layout/toolbar_notification_button" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_order_id"
+                style="@style/mediumTextViewStyle"
+                android:layout_marginBottom="@dimen/margin"
+                android:text="لرقم المرجعي" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/order_transparent"
+                android:padding="@dimen/small_margin">
+
+                <TextView
+                    android:id="@+id/tv_sender_name"
+                    style="@style/SmallTextViewStyle"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_sender_address"
+                    style="@style/SmallTextViewStyle"
+                    android:layout_marginTop="@dimen/little_margin"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_sender_name" />
+
+                <ImageView
+                    android:id="@+id/iv_sender_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_call"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_sender_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/small_margin"
+                    android:src="@drawable/ic_location"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_sender_call"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:background="@drawable/order_transparent"
+                android:padding="@dimen/small_margin">
+
+                <TextView
+                    android:id="@+id/tv_receiver_name"
+                    style="@style/SmallTextViewStyle"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_receiver_address"
+                    style="@style/SmallTextViewStyle"
+                    android:layout_marginTop="@dimen/little_margin"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_receiver_name" />
+
+                <ImageView
+                    android:id="@+id/iv_receiver_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_call"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_receiver_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/small_margin"
+                    android:src="@drawable/ic_location"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_receiver_call"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_button"
+                android:orientation="vertical"
+                android:padding="@dimen/small_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:text="@string/receive_address"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/darkGray" />
+
+                    <TextView
+                        android:id="@+id/tv_receiver_address_text"
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:textAlignment="viewEnd" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/little_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@drawable/dot_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:text="@string/receive_address"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/darkGray" />
+
+                    <TextView
+                        android:id="@+id/tv_receiver_address_text_2"
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:textAlignment="viewEnd" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/little_margin"
+                    android:background="@drawable/dot_line" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:background="@drawable/white_button"
+                android:orientation="vertical"
+                android:padding="@dimen/small_margin">
+
+                <TextView
+                    style="@style/mediumTextViewStyle"
+                    android:layout_gravity="start"
+                    android:text="@string/order_details" />
+
+                <TextView
+                    android:id="@+id/tv_order_details"
+                    style="@style/SmallTextViewStyle"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:text="@string/order_details"
+                    android:textColor="@color/darkGray" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_button"
+                android:orientation="vertical"
+                android:padding="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:text="@string/delivery_value"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/darkGray" />
+
+                    <TextView
+                        android:id="@+id/tv_delivery_value"
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:textAlignment="viewEnd" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/little_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@drawable/dot_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:text="@string/app_dues"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/darkGray" />
+
+                    <TextView
+                        android:id="@+id/tv_app_deserved"
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:textAlignment="viewEnd" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/little_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@drawable/dot_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:text="@string/captain_dues"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/darkGray" />
+
+                    <TextView
+                        android:id="@+id/tv_captain_dues"
+                        style="@style/SmallTextViewStyle"
+                        android:layout_weight="1"
+                        android:textAlignment="viewEnd" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="@dimen/little_margin"
+                    android:background="@drawable/dot_line" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_delivered"
+                style="@style/BlackButtonStyle"
+                android:text="@string/order_delivered" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

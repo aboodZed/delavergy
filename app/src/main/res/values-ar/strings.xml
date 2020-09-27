@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ديلفرجي</string>
+    <string name="waiting">أنتظر</string>
+    <string name="error">خطأ</string>
+    <string name="no_connection">لا يوجد أتصال بالإنترنت</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="password">كلمة المرور</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="password_recovery">أسترجاع كلمة المرور</string>
+    <string name="ok">أوافق</string>
+    <string name="reset_string">رجاءا ادخل رقم الهاتف\n لاستقبال كود لانشاء كلمة المرور الجديدة </string>
+    <string name="send">أرسل</string>
+    <string name="receive_code">أستقبال الكود المرسل</string>
+    <string name="verify_string">أدخل كود OTP هنا</string>
+    <string name="resend_string">أعادة أرسال الكود</string>
+    <string name="resend">أعادة الأسال</string>
+    <string name="reset_password_string">أعادة تهيئة كلمة المرور</string>
+    <string name="new_password_string">أدخل كلمة المرور الجديدة</string>
+    <string name="refresh">تحديث</string>
+    <string name="conform_password">تأكيد كلمة المرور</string>
+    <string name="terms_and_conditions">Terms and conditions</string>
+    <string name="notification">Notification</string>
+    <string name="delivery_value">Delivary value</string>
+    <string name="attainment_complete">Attainment complete</string>
+    <string name="receive_address">receiving address text</string>
+    <string name="order_details">Order details</string>
+    <string name="order_delivered">The order has been delivered</string>
+    <string name="app_dues">Application dues</string>
+    <string name="captain_dues">Captain dues</string>
+    <string name="home">Home</string>
+    <string name="wallet">Wallet</string>
+    <string name="orders">Orders</string>
+    <string name="contact_us">Contact us</string>
+    <string name="profile">profile</string>
+</resources>

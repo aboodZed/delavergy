@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#E8E0C9</color>
+    <color name="colorAccent">#0B0B0B</color>
+    <color name="darkButton">#382D0D</color>
+    <color name="darkGradient">#7F610D</color>
+    <color name="middleGradient">#FCC11A</color>
+    <color name="LightGradient">#FDC21A</color>
+    <color name="accept">#13EA6F</color>
+    <color name="reject">#FF0753</color>
+    <color name="gray">#F0F0F0</color>
+    <color name="darkGray">#707070</color>
+</resources>

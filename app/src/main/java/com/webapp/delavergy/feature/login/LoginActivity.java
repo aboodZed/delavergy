@@ -1,0 +1,61 @@
+package com.webapp.delavergy.feature.login;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.webapp.delavergy.R;
+import com.webapp.delavergy.feature.main.MainActivity;
+import com.webapp.delavergy.feature.main.home.HomeFragment;
+import com.webapp.delavergy.feature.password.ResetPasswordActivity;
+import com.webapp.delavergy.feature.password.step_one.ResetStepOneFragment;
+import com.webapp.delavergy.utils.NavigateUtils;
+import com.webapp.delavergy.utils.language.BaseActivity;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+
+public class LoginActivity extends BaseActivity {
+
+    @BindView(R.id.et_phone) EditText etPhone;
+    @BindView(R.id.et_password) EditText etPassword;
+    @BindView(R.id.btn_login) Button btnLogin;
+    @BindView(R.id.btn_password_recovery) Button btnPasswordRecovery;
+
+    private LoginPresenter loginPresenter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.setLayoutRes(R.layout.activity_login);
+        super.onCreate(savedInstanceState);
+        //hide state bar
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        //presenter
+        loginPresenter = new LoginPresenter();
+    }
+
+    @OnClick(R.id.btn_login)
+    public void login() {
+        navigate(HomeFragment.page);
+    }
+
+    @OnClick(R.id.btn_password_recovery)
+    public void recovery() {
+        navigate(ResetStepOneFragment.page);
+    }
+
+    @Override
+    public void navigate(int page) {
+        switch (page) {
+            case HomeFragment.page:
+                NavigateUtils.activityIntent(this, MainActivity.class, false);
+                break;
+            case ResetStepOneFragment.page:
+                NavigateUtils.activityIntent(this, ResetPasswordActivity.class, true);
+                break;
+        }
+    }
+}
