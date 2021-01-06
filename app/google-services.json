@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "587897693502",
+    "firebase_url": "https://delivergy-5a326.firebaseio.com",
+    "project_id": "delivergy-5a326",
+    "storage_bucket": "delivergy-5a326.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587897693502:android:a282cee2638028db28f86f",
+        "android_client_info": {
+          "package_name": "com.webapp.delavergy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587897693502-ck8jvfdfjcbdenk6qn2e3ruaqupiqejl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbzYCjfgTTWzZP3OQ0HSGIYkkiYy-Iz_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587897693502-ck8jvfdfjcbdenk6qn2e3ruaqupiqejl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

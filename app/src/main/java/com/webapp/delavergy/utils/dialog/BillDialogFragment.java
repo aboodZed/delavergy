@@ -10,12 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.webapp.delavergy.R;
+import com.webapp.delavergy.utils.listener.RequestListener;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class BillDialogFragment extends BottomSheetDialogFragment {
+
+    @BindView(R.id.tv_value) TextView tvValue;
+    @BindView(R.id.btn_attainment) Button tvAttainment;
+
+    private RequestListener<Boolean> requestListener;
 
     public static BillDialogFragment newInstance() {
         final BillDialogFragment fragment = new BillDialogFragment();
@@ -48,5 +58,15 @@ public class BillDialogFragment extends BottomSheetDialogFragment {
                 return true;
             } else return false;
         });
+    }
+
+    public void setRequestListener(RequestListener<Boolean> requestListener) {
+        this.requestListener = requestListener;
+    }
+
+    @OnClick(R.id.btn_attainment)
+    public void attainment() {
+        requestListener.onSuccess(true,"");
+        dismiss();
     }
 }

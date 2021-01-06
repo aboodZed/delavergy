@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.feature.login.LoginActivity;
+import com.webapp.delavergy.feature.main.MainActivity;
+import com.webapp.delavergy.utils.AppController;
 import com.webapp.delavergy.utils.NavigateUtils;
 import com.webapp.delavergy.utils.language.BaseActivity;
 
@@ -22,18 +24,17 @@ public class SplashActivity extends BaseActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
         //presenter
-        splashPresenter = new SplashPresenter(this);
-        go();
-    }
-
-    private void go() {
-        new Handler().postDelayed(() -> navigate(0), 3000);
+        splashPresenter = new SplashPresenter(this, this::navigate);
     }
 
     @Override
     public void navigate(int page) {
         switch (page) {
-            case 0: NavigateUtils.activityIntent(this, LoginActivity.class, false);
+            case 0:
+                NavigateUtils.activityIntent(this, LoginActivity.class, false);
+                break;
+            case 1:
+                NavigateUtils.activityIntent(this, MainActivity.class, false);
                 break;
         }
     }

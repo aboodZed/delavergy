@@ -21,7 +21,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/tv_attainment"
+        android:id="@+id/btn_attainment"
         style="@style/BlackButtonStyle"
         android:text="@string/attainment_complete"
         android:textStyle="bold" />

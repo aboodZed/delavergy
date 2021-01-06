@@ -50,7 +50,8 @@ public class ApiClient {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request.Builder builder = chain.request().newBuilder();
-            builder.addHeader("Authorization", AppController.getInstance().getAppLocal().getKeyAccessToken());
+            builder.addHeader("Authorization", AppController.getInstance().getAppLocal().getUser().getToken_type()
+                    + " " + AppController.getInstance().getAppLocal().getUser().getAccess_token());
             builder.addHeader("X-Requested-With", "XMLHttpRequest");
             builder.header("Accept-Language", AppController.getInstance()
                     .getAppLocal().getAppLanguage());

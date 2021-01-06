@@ -4,15 +4,15 @@ import android.app.Application;
 
 import com.webapp.delavergy.services.api.ApiClient;
 import com.webapp.delavergy.services.api.ApiInterface;
-import com.webapp.delavergy.services.api.ApiShared;
+import com.webapp.delavergy.services.api.GetAPIData;
 
 public class AppController extends Application {
 
     private static AppController mInstance;
 
     private AppLocal appLocal;
+    private GetAPIData getAPIData;
     private ApiInterface clientAPI;
-    private ApiShared apiShared;
 
     public static synchronized AppController getInstance() {
         return mInstance;
@@ -23,8 +23,8 @@ public class AppController extends Application {
         super.onCreate();
         mInstance = this;
         appLocal = new AppLocal(this);
-        //clientAPI = ApiClient.getRetrofit().create(ApiInterface.class);
-        apiShared = new ApiShared();
+        getAPIData = new GetAPIData();
+        clientAPI = ApiClient.getRetrofit().create(ApiInterface.class);
     }
 
     public AppLocal getAppLocal() {
@@ -35,7 +35,7 @@ public class AppController extends Application {
         return clientAPI;
     }
 
-    public ApiShared getApiShared() {
-        return apiShared;
+    public GetAPIData getGetAPIData() {
+        return getAPIData;
     }
 }

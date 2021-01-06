@@ -38,7 +38,7 @@
         <Button
             android:id="@+id/btn_send"
             style="@style/ButtonStyle"
-            android:background="@drawable/dark_gray_button"
+            android:background="@drawable/dark_button"
             android:text="@string/send" />
 
     </LinearLayout>

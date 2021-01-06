@@ -4,15 +4,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.webapp.delavergy.models.LoginResult;
 import com.webapp.delavergy.models.User;
 
 public class AppLocal {
 
     public final static String KEY_APP_LANGUAGE = "app_language";
     public final static String KEY_FIRST_RUN = "first_run";
+    public final static String KEY_MOBILE = "mobile";
+
     public final static String KEY_USER = "user";
     public final static String KEY_LOGIN = "login";
-    public final static String KEY_ACCESS_TOKEN = "access_token";
     private final static String KEY_RESERVATION = "reservation";
     private final static String KEY_SUBSCRIBE = "subscribe";
 
@@ -49,26 +51,17 @@ public class AppLocal {
         return pref.getString(KEY_APP_LANGUAGE, "ar");
     }
 
-    public void setKeyAccessToken(String key) {
-        editor.putString(KEY_ACCESS_TOKEN, key);
-        editor.apply();
-    }
-
-    public String getKeyAccessToken() {
-        return "Bearer " + pref.getString(KEY_ACCESS_TOKEN, "");
-    }
-
-    public void setUser(User user) {
+    public void setUser(LoginResult loginResult) {
         Gson gson = new Gson();
-        String json = gson.toJson(user);
+        String json = gson.toJson(loginResult);
         editor.putString(KEY_USER, json);
         editor.apply();
     }
 
-    public User getUser() {
+    public LoginResult getUser() {
         Gson gson = new Gson();
         String json = pref.getString(KEY_USER, "");
-        return gson.fromJson(json, User.class);
+        return gson.fromJson(json, LoginResult.class);
     }
 
     public void setLogin(boolean b) {
@@ -78,6 +71,20 @@ public class AppLocal {
 
     public boolean isLogin() {
         return pref.getBoolean(KEY_LOGIN, false);
+    }
+
+    public void setMobile(String mobile) {
+        editor.putString(KEY_MOBILE, mobile);
+        editor.apply();
+    }
+
+    public String getMobile() {
+        return pref.getString(KEY_MOBILE, "");
+    }
+
+    public void removeMobile() {
+        editor.remove(KEY_MOBILE);
+        editor.apply();
     }
 
     public void clean() {

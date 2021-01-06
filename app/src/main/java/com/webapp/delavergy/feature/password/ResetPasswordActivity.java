@@ -5,6 +5,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.webapp.delavergy.R;
+import com.webapp.delavergy.feature.login.LoginActivity;
 import com.webapp.delavergy.feature.password.step_one.ResetStepOneFragment;
 import com.webapp.delavergy.feature.password.step_three.ResetStepThreeFragment;
 import com.webapp.delavergy.feature.password.step_two.ResetStepTwoFragment;
@@ -62,9 +63,12 @@ public class ResetPasswordActivity extends BaseActivity {
                 NavigateUtils.replaceFragment(getSupportFragmentManager(), resetStepTwoFragment, R.id.fl_container);
                 break;
             case ResetStepThreeFragment.page:
-                resetStepThreeFragment = ResetStepThreeFragment.newInstance();
+                resetStepThreeFragment = ResetStepThreeFragment.newInstance(this);
                 NavigateUtils.replaceFragment(getSupportFragmentManager(), resetStepThreeFragment, R.id.fl_container);
                 break;
+            default:
+                back();
+
         }
     }
 }

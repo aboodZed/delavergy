@@ -16,7 +16,7 @@
             android:layout_gravity="center"
             android:textSize="@dimen/large_margin"
             android:text="@string/waiting"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginBottom="@dimen/alpha"/>
 
         <TextView
@@ -25,13 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="@dimen/medium_margin"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginBottom="@dimen/alpha"/>
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal" />
+            android:layout_gravity="bottom|center_horizontal"
+            android:indeterminateTint="@color/colorPrimaryDark"/>
 
     </LinearLayout>
 </FrameLayout>

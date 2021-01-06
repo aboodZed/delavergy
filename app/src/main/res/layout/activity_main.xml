@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/i_toolbar"
-        android:layout_above="@+id/bnv_bottom"/>
+        android:layout_above="@id/bnv_bottom"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_bottom"
@@ -84,12 +84,14 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="@dimen/little_margin">
+                android:padding="@dimen/mini_margin">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civ_user"
                     android:layout_width="@dimen/medium_margin"
-                    android:layout_height="@dimen/medium_margin" />
+                    android:layout_height="@dimen/medium_margin"
+                    android:src="@drawable/img_user"
+                    android:layout_marginBottom="@dimen/mini_margin"/>
 
                 <TextView
                     android:id="@+id/tv_profile"
@@ -97,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/profile"
-                    android:textSize="@dimen/small_text" />
+                    android:textSize="@dimen/little_text" />
 
             </LinearLayout>
         </LinearLayout>

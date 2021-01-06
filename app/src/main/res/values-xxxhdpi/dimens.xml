@@ -1,0 +1,18 @@
+<resources>
+	<dimen name="medium_margin">28dp</dimen>
+	<dimen name="margin">21dp</dimen>
+	<dimen name="image_size">84dp</dimen>
+	<dimen name="line">1.4dp</dimen>
+	<dimen name="mini_margin">2.8dp</dimen>
+	<dimen name="list_item_spacing_half">8.4dp</dimen>
+	<dimen name="little_margin">5.6dp</dimen>
+	<dimen name="list_item_spacing">16.8dp</dimen>
+	<dimen name="alpha">112dp</dimen>
+	<dimen name="large_margin">44.8dp</dimen>
+	<dimen name="small_margin">9.8dp</dimen>
+	<dimen name="xlarge_margin">70dp</dimen>
+	<dimen name="small_text">14sp</dimen>
+	<dimen name="text">16.8sp</dimen>
+	<dimen name="medium_text">19.6sp</dimen>
+	<dimen name="large_text">30.8sp</dimen>
+</resources>

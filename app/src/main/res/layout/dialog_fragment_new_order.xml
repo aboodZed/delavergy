@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/margin"
+    tools:context=".utils.dialog.order.NewOrderDialogFragment"
+    android:background="@drawable/white_button">
+
+    <TextView
+        style="@style/mediumTextViewStyle"
+        android:layout_marginBottom="@dimen/margin"
+        android:text="@string/new_order" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_way_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_way_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_receiver_address"
+            style="@style/SmallTextViewStyle"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/receive_address"
+            app:layout_constraintStart_toEndOf="@+id/iv_way_line"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_receiver_city"
+            style="@style/SmallTextViewStyle"
+            android:layout_marginStart="@dimen/margin"
+            android:text="@string/city"
+            app:layout_constraintEnd_toStartOf="@+id/tv_receiver_far"
+            app:layout_constraintStart_toEndOf="@+id/tv_receiver_address"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_receiver_far"
+            style="@style/SmallTextViewStyle"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:text="@string/far_from_you"
+            app:layout_constraintEnd_toStartOf="@+id/tv_receiver_distance"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_receiver_distance"
+            style="@style/SmallTextViewStyle"
+            android:text="30km"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_receiver_address_2"
+            style="@style/SmallTextViewStyle"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="**************"
+            android:textColor="@color/reject"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_way_line" />
+
+        <TextView
+            android:id="@+id/tv_receiver_city_2"
+            style="@style/SmallTextViewStyle"
+            android:text="*********"
+            android:textColor="@color/reject"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_receiver_far_2"
+            app:layout_constraintStart_toEndOf="@+id/tv_receiver_address_2" />
+
+        <TextView
+            android:id="@+id/tv_receiver_far_2"
+            style="@style/SmallTextViewStyle"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:text="@string/far_from_you"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_receiver_distance" />
+
+        <TextView
+            android:id="@+id/tv_receiver_distance_2"
+            style="@style/SmallTextViewStyle"
+            android:text="******"
+            android:textColor="@color/reject"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin">
+
+        <Button
+            android:id="@+id/btn_accept_order"
+            android:layout_weight="1"
+            style="@style/AcceptButtonStyle"
+            android:text="@string/accept_order"
+            android:layout_marginEnd="@dimen/small_margin"/>
+
+
+        <Button
+            android:id="@+id/btn_reject_order"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/reject_order"
+            style="@style/RejectButtonStyle"/>
+
+    </LinearLayout>
+
+</LinearLayout>

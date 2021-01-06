@@ -27,7 +27,11 @@ public class AuthInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
         Response response = chain.proceed(builder.build());
         if (response.code() == 401) {
-            NavigateUtils.activityIntent(context, LoginActivity.class,true);
+            NavigateUtils.activityIntent(context, LoginActivity.class, true);
+        }
+
+        if (!response.isSuccessful()) {
+            return null;
         }
         return response;
     }

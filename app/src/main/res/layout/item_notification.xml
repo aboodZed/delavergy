@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/tv_date"
-            style="@style/SmallTextViewStyle"
+            style="@style/normalTextViewStyle"
             android:textColor="@color/darkGray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,6 @@
             android:id="@+id/tv_details"
             style="@style/SmallTextViewStyle"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/small_margin"
             android:textColor="@color/darkGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

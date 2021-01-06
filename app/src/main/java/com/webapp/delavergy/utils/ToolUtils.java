@@ -67,8 +67,8 @@ public class ToolUtils {
     public static void showError(Activity activity, ResponseBody s) {
         try {
             Log.e("errorInNoSuccess", s.string());
-            JSONObject jObjError = new JSONObject(s.string()).getJSONObject("status");
-            showLongToast(activity, jObjError.getString("message"));
+            //JSONObject jObjError = new JSONObject(s.string()).getJSONObject("status");
+            showLongToast(activity, new JSONObject(s.string()).getString("message"));
         } catch (Exception e) {
             if (activity != null)
                 showLongToast(activity, activity.getString(R.string.error));
@@ -79,7 +79,8 @@ public class ToolUtils {
         if (checkTheInternet()) {
             return Glide.with(activity)
                     .asBitmap()
-                    .load(url);
+                    .load(url)
+                    .placeholder(R.drawable.img_user);
         } else {
             showShortToast(activity, activity.getString(R.string.no_connection));
             return null;
@@ -87,27 +88,29 @@ public class ToolUtils {
     }
 
     public static void loadImageNormal(Activity activity, ProgressBar progressBar, String url, ImageView imgView) {
-        RequestBuilder<Bitmap> builder = loadImage(activity, url);
-        if (builder != null) {
-            builder.listener(new RequestListener<Bitmap>() {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model
-                        , Target<Bitmap> target, boolean isFirstResource) {
-                    if (progressBar != null) {
-                        progressBar.setVisibility(View.GONE);
+        if (url != null) {
+            RequestBuilder<Bitmap> builder = loadImage(activity, url);
+            if (builder != null) {
+                builder.listener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model
+                            , Target<Bitmap> target, boolean isFirstResource) {
+                        if (progressBar != null) {
+                            progressBar.setVisibility(View.GONE);
+                        }
+                        return false;
                     }
-                    return false;
-                }
 
-                @Override
-                public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target
-                        , DataSource dataSource, boolean isFirstResource) {
-                    if (progressBar != null) {
-                        progressBar.setVisibility(View.GONE);
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target
+                            , DataSource dataSource, boolean isFirstResource) {
+                        if (progressBar != null) {
+                            progressBar.setVisibility(View.GONE);
+                        }
+                        return false;
                     }
-                    return false;
-                }
-            }).into(imgView);
+                }).into(imgView);
+            }
         }
     }
 
@@ -124,7 +127,7 @@ public class ToolUtils {
     public static String getDate(long time) {
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(time * 1000);
-        String date = DateFormat.format("dd-MM-yyyy", cal).toString();
+        String date = DateFormat.format("dd/MM/yyyy", cal).toString();
         return date;
     }
 

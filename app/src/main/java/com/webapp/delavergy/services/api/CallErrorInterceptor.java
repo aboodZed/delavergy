@@ -21,8 +21,7 @@ class CallErrorInterceptor implements Interceptor {
                 if (response.body() != null) {
                     String responseString = response.body().string();
                     Log.e(getClass().getName() + ": response", responseString);
-                    JSONObject statusJSON = new JSONObject(responseString).getJSONObject("status");
-                    String message = statusJSON.getString("message");
+                    String message = new JSONObject(responseString).getString("message");
                     throw new IOException(message);
                 }
             } catch (JSONException e) {

@@ -1,14 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/margin"
+    android:paddingTop="@dimen/margin"
+    android:paddingEnd="@dimen/margin"
     tools:context=".feature.main.orders.OrdersFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="orders" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_button"
+        android:orientation="vertical"
+        android:padding="@dimen/margin">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/little_margin"
+                android:layout_weight="1"
+                android:background="@drawable/selector_background">
+
+                <Spinner
+                    android:id="@+id/sp_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/little_margin" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/little_margin"
+                android:layout_weight="1"
+                android:background="@drawable/selector_background">
+
+                <Spinner
+                    android:id="@+id/sp_order_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/little_margin" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_filter"
+            style="@style/BlackButtonStyle"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/yellow_button"
+            android:text="@string/filter" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/small_margin">
+
+        <LinearLayout
+            android:id="@+id/ll_processing_orders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_processing_orders"
+                style="@style/mediumTextViewStyle"
+                android:text="@string/processing_orders"
+                android:textColor="@color/darkGray" />
+
+            <View
+                android:id="@+id/v_p_order_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/mini_margin"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@color/colorAccent"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_finished_orders"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_finished_orders"
+                style="@style/mediumTextViewStyle"
+                android:text="@string/finished_orders"
+                android:textColor="@color/darkGray" />
+
+            <View
+                android:id="@+id/v_f_order_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/mini_margin"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@color/colorAccent"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_orders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
