@@ -1,5 +1,7 @@
 package com.webapp.delavergy.utils.location.locationHelper;
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
@@ -11,10 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Vishal on 10/20/2018.
+ * Updated by Abd ulla on 1/28/2021.
  */
 
 public class DataParser {
+
     public List<List<HashMap<String, String>>> parse(JSONObject jObject) {
 
         List<List<HashMap<String, String>>> routes = new ArrayList<>();
@@ -30,7 +33,6 @@ public class DataParser {
                 /** Traversing all legs */
                 for (int j = 0; j < jLegs.length(); j++) {
                     jSteps = ((JSONObject) jLegs.get(j)).getJSONArray("steps");
-
                     /** Traversing all steps */
                     for (int k = 0; k < jSteps.length(); k++) {
                         String polyline = "";
@@ -93,5 +95,27 @@ public class DataParser {
         }
 
         return poly;
+    }
+
+    public String getDistance(JSONObject jObject) {
+        List<List<HashMap<String, String>>> routes = new ArrayList<>();
+        JSONArray jRoutes;
+        JSONArray jLegs;
+        String distance = "";
+        try {
+            jRoutes = jObject.getJSONArray("routes");
+            /** Traversing all routes */
+            for (int i = 0; i < jRoutes.length(); i++) {
+                jLegs = ((JSONObject) jRoutes.get(i)).getJSONArray("legs");
+                List path = new ArrayList<>();
+                /** Traversing all legs */
+                for (int j = 0; j < jLegs.length(); j++) {
+                    distance = ((JSONObject) jLegs.get(j)).getJSONObject("distance").getString("text");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return distance;
     }
 }

@@ -8,6 +8,7 @@
     android:background="@color/colorPrimaryDark">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/small_margin">

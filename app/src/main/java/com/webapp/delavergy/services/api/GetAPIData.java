@@ -13,6 +13,7 @@ public class GetAPIData {
     private SettingData settingData;
     private PasswordData passwordData;
     private OrderData orderData;
+
     public GetAPIData() {
         authData = new AuthData();
         notificationData = new NotificationData();

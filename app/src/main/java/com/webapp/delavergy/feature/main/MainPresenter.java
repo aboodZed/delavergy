@@ -7,7 +7,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import com.webapp.delavergy.models.LoginResult;
 import com.webapp.delavergy.models.Result;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.RequestListener;
 
@@ -35,7 +35,7 @@ class MainPresenter {
 
                     @Override
                     public void onFail(String msg) {
-                        ToolUtils.showLongToast(activity, msg);
+                        UIUtils.showLongToast(activity, msg);
                     }
                 });
     }

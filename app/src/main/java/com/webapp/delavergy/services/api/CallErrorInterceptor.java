@@ -14,6 +14,7 @@ import okhttp3.Response;
 class CallErrorInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
+
         Request.Builder builder = chain.request().newBuilder();
         Response response = chain.proceed(builder.build());
         if (response.code() < 200 || response.code() > 300) {

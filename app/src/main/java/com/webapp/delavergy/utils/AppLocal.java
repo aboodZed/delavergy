@@ -15,10 +15,8 @@ public class AppLocal {
 
     public final static String KEY_USER = "user";
     public final static String KEY_LOGIN = "login";
-    private final static String KEY_RESERVATION = "reservation";
-    private final static String KEY_SUBSCRIBE = "subscribe";
 
-    private final static String TRACKING_ORDER = "tracking";
+    private final static String KEY_USER_STATUS = "status";
 
     private static final String PREF_NAME = "AppLocal";
     private int PRIVATE_MODE = 0;
@@ -85,6 +83,15 @@ public class AppLocal {
     public void removeMobile() {
         editor.remove(KEY_MOBILE);
         editor.apply();
+    }
+
+    public void setUserStatus(String status){
+        editor.putString(KEY_USER_STATUS, status);
+        editor.apply();
+    }
+
+    public String getUserStatus(){
+        return pref.getString(KEY_USER_STATUS, "");
     }
 
     public void clean() {

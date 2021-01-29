@@ -1,17 +1,16 @@
 package com.webapp.delavergy.feature.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.feature.main.home.HomeFragment;
 import com.webapp.delavergy.models.LoginResult;
-import com.webapp.delavergy.models.User;
+import com.webapp.delavergy.services.firebase.GenerateFCMService;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
-import com.webapp.delavergy.utils.dialog.WaitDialogFragment;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.NavigationView;
 import com.webapp.delavergy.utils.listener.RequestListener;
@@ -64,18 +63,22 @@ class LoginPresenter {
                 .login(activity, map, new RequestListener<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult, String msg) {
+                        //save user data
                         loginResult.getUser().setPassword(password);
                         AppController.getInstance().getAppLocal().setUser(loginResult);
                         AppController.getInstance().getAppLocal().setLogin(true);
+                        //start GenerateFCMService
+                        Intent service = new Intent(activity, GenerateFCMService.class);
+                        activity.startService(service);
+
                         navigationView.navigate(HomeFragment.page);
                         dialogView.hideDialog();
-
                     }
 
                     @Override
                     public void onFail(String msg) {
                         dialogView.hideDialog();
-                        ToolUtils.showLongToast(activity, msg);
+                        UIUtils.showLongToast(activity, msg);
                     }
                 });
     }

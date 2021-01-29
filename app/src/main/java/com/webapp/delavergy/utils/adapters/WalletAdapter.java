@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.models.Wallet;
 import com.webapp.delavergy.utils.NavigateUtils;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 
 import java.util.ArrayList;
 
@@ -68,14 +68,14 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.WalletHold
 
         private void setData(Wallet wallet) {
             this.wallet = wallet;
-            tvOrderId.setText(String.valueOf(wallet.getOrder_id()));
-            tvDate.setText(ToolUtils.getDate(wallet.getCreate_at()));
-            tvValue.setText(String.valueOf(wallet.getValue()));
+            tvOrderId.setText(String.valueOf(wallet.getInvoice_number()));
+            tvDate.setText(UIUtils.getDate(wallet.getCreated_timestamp()));
+            tvValue.setText(String.valueOf(wallet.getApp_revenue()));
         }
 
         @OnClick(R.id.cl_background)
         public void open() {
-            NavigateUtils.openOrder(activity, wallet.getOrder_id(), true);
+            NavigateUtils.openOrder(activity, wallet.getId(), true);
         }
 
     }

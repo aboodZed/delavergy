@@ -29,7 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layoutRes);
-        ButterKnife.bind(this, this);
+        ButterKnife.bind(this);
     }
 
     private ProgressDialog progressDialog;

@@ -33,6 +33,10 @@ public class LoginResult extends Result {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "LoginResult{" +

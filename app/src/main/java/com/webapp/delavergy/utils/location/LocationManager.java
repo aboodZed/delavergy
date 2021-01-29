@@ -17,9 +17,10 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.maps.model.LatLng;
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.utils.PermissionUtil;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 
 public class LocationManager {
 
@@ -139,7 +140,7 @@ public class LocationManager {
     }
 
     public void fetchAutomaticLocation() {
-        //ToolUtils.showLongToast(activity.getString(R.string.location_services_on), activity);
+        //UIUtils.showLongToast(activity.getString(R.string.location_services_on), activity);
         locationFetched = false;
         try {
             locationChecker.postDelayed(locationCheckTask, MILLISECONDS_BEFORE_FAILURE);
@@ -175,10 +176,31 @@ public class LocationManager {
     }
 
     private void onLocationFetchFail() {
-        ToolUtils.showLongToast(activity, activity.getString(R.string.auto_location_fail));
+        UIUtils.showLongToast(activity, activity.getString(R.string.auto_location_fail));
     }
 
     public void cleanUp() {
         activity = null;
+    }
+
+    public String getUrl(LatLng origin, LatLng dest) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Sensor enabled
+        String sensor = "sensor=false";
+        // mode
+        String mode = "mode=driving";
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters
+                + "&key=" + activity.getString(R.string.google_maps_key);
+
+        //String s = "https://maps.googleapis.com/maps/api/directions/json?origin=31.5198972,34.4457472&destination=31.5242647,34.4432764&sensor=false&mode=driving&key=AIzaSyDVhuq5daXMExTs0uXCmrTTTDB0XppRNyE";
+        return url;
     }
 }

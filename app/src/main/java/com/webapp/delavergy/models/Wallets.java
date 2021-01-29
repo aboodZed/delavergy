@@ -7,27 +7,63 @@ import java.util.ArrayList;
 
 public class Wallets extends Result {
 
-    @SerializedName("wallets")
+    @SerializedName("wallet")
     @Expose
-    private ArrayList<Wallet> wallets = new ArrayList<>();
+    private double wallet;
 
-    @SerializedName("total_wallet")
+    @SerializedName("app_commission")
     @Expose
-    private int total_wallet;
+    private double app_commission;
 
-    public ArrayList<Wallet> getWallets() {
-        return wallets;
+    @SerializedName("total_delivery_cost")
+    @Expose
+    private double total_delivery_cost;
+
+    @SerializedName("total_driver_revenue")
+    @Expose
+    private double total_driver_revenue;
+
+    @SerializedName("app_revenue")
+    @Expose
+    private double app_revenue;
+
+    @SerializedName("wallet_details")
+    @Expose
+    private ArrayList<Wallet> wallet_details = new ArrayList<>();
+
+    public double getWallet() {
+        return wallet;
     }
 
-    public int getTotal_wallet() {
-        return total_wallet;
+    public double getApp_commission() {
+        return app_commission;
+    }
+
+    public double getTotal_delivery_cost() {
+        return total_delivery_cost;
+    }
+
+    public double getTotal_driver_revenue() {
+        return total_driver_revenue;
+    }
+
+    public double getApp_revenue() {
+        return app_revenue;
+    }
+
+    public ArrayList<Wallet> getWallet_details() {
+        return wallet_details;
     }
 
     @Override
     public String toString() {
         return "Wallets{" +
-                "wallets=" + wallets +
-                ", total_wallet=" + total_wallet +
+                "wallet=" + wallet +
+                ", app_commission=" + app_commission +
+                ", total_delivery_cost=" + total_delivery_cost +
+                ", total_driver_revenue=" + total_driver_revenue +
+                ", app_revenue=" + app_revenue +
+                ", wallet_details=" + wallet_details +
                 '}';
     }
 }

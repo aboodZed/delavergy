@@ -5,7 +5,7 @@ import android.app.Activity;
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.models.Settings;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.RequestListener;
 
@@ -31,7 +31,7 @@ class ContactPresenter {
 
                     @Override
                     public void onFail(String msg) {
-                        ToolUtils.showLongToast(activity, msg);
+                        UIUtils.showLongToast(activity, msg);
                         dialogView.hideDialog();
                     }
                 });

@@ -31,7 +31,7 @@
             android:id="@+id/tv_receiver_address"
             style="@style/SmallTextViewStyle"
             android:layout_marginStart="@dimen/small_margin"
-            android:text="@string/receive_address"
+            android:text="@string/receiver_address"
             app:layout_constraintStart_toEndOf="@+id/iv_way_line"
             app:layout_constraintTop_toTopOf="parent" />
 

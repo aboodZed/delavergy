@@ -23,7 +23,7 @@
     <string name="notification">التنبيهات</string>
     <string name="delivery_value">قيمة التوصيل</string>
     <string name="attainment_complete">تم التوصيل</string>
-    <string name="receive_address">مكان الأستلام نصيا</string>
+    <string name="receiver_address">مكان الأستلام نصيا</string>
     <string name="order_details">تفاصيل الطلب</string>
     <string name="order_delivered">تم توصيل الطلب</string>
     <string name="app_dues">مستحقات التطبيق</string>
@@ -68,8 +68,8 @@
     <string name="not_match">غير متطابق</string>
     <string name="subject">الموضوع</string>
     <string name="message">الرسالة</string>
-    <string name="liaison_officer">ضابط أرتباط</string>
-    <string name="administrative">أداري</string>
+    <string name="liaison_officer">ضابط إرتباط</string>
+    <string name="administrative">إداري</string>
     <string name="order_type">نوع الطلب</string>
     <string name="check_internet">تأكد من أتصالك ب الأنترنت</string>
     <string name="get_privacy">جلب أعدادات الخصوصية</string>
@@ -79,5 +79,17 @@
     <string name="all_orders">كل الطلبات</string>
     <string name="get_orders">جلب الطلبات</string>
     <string name="un_able_get_location">لا يمكن الوصول إلى الموقع الحالي</string>
-    <string name="getSettings">جللب الإعدادات</string>
+    <string name="getSettings">جلب الإعدادات</string>
+    <string name="complete">منتهي</string>
+    <string name="uncomplete">غير منتهي</string>
+    <string name="get_order">جلب تفاصيل الطلب</string>
+    <string name="send_email">ارسال رسالة</string>
+    <string name="invoice_number">الرقم المرجعي لطلب</string>
+    <string name="delivery_order">تم توصيل الطلب</string>
+    <string name="sender_address">مكان التسليم نصيا</string>
+    <string name="store_address">عنوان المتجر نصيا</string>
+    <string name="pick_up_order">استلام الطلب</string>
+    <string name="send_address">مكان الأستلام</string>
+    <string name="receive_address">مكان التسليم</string>
+    <string name="get_user_data">جلب بيانات المستخدم</string>
 </resources>

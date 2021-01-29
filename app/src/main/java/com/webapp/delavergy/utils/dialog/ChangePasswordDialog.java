@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,12 +17,9 @@ import androidx.fragment.app.DialogFragment;
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.models.Result;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.RequestListener;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -132,14 +128,14 @@ public class ChangePasswordDialog extends DialogFragment implements DialogView<R
                     @Override
                     public void onSuccess(Result result, String msg) {
                         hideDialog();
-                        ToolUtils.showLongToast(getActivity(), result.getMessage());
+                        UIUtils.showLongToast(getActivity(), result.getMessage());
                         dismiss();
                     }
 
                     @Override
                     public void onFail(String msg) {
                         hideDialog();
-                        ToolUtils.showLongToast(getActivity(), msg);
+                        UIUtils.showLongToast(getActivity(), msg);
                     }
                 });
     }

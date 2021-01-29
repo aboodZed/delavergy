@@ -4,28 +4,19 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.poovam.pinedittextfield.PinField;
 import com.poovam.pinedittextfield.SquarePinField;
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.feature.password.step_one.ResetStepOnePresenter;
-import com.webapp.delavergy.feature.password.step_three.ResetStepThreeFragment;
-import com.webapp.delavergy.models.Code;
-import com.webapp.delavergy.models.Verify;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
 import com.webapp.delavergy.utils.dialog.WaitDialogFragment;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.NavigationView;
-
-import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

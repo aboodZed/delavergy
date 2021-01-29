@@ -23,7 +23,7 @@
     <string name="notification">Notification</string>
     <string name="delivery_value">Delivery value</string>
     <string name="attainment_complete">Attainment complete</string>
-    <string name="receive_address">receiving address text</string>
+    <string name="receiver_address">receiving address text</string>
     <string name="order_details">Order details</string>
     <string name="order_delivered">The order was delivered</string>
     <string name="app_dues">Application dues</string>
@@ -80,4 +80,16 @@
     <string name="get_orders">Get Orders</string>
     <string name="un_able_get_location">Unable to get location.</string>
     <string name="getSettings">Get settings</string>
+    <string name="complete">Complete</string>
+    <string name="uncomplete">Uncomplete</string>
+    <string name="get_order">Get order details</string>
+    <string name="send_email">Send Email</string>
+    <string name="invoice_number">Invoice number for order</string>
+    <string name="delivery_order">Delivered the order</string>
+    <string name="sender_address">sender address text</string>
+    <string name="store_address">Store address text</string>
+    <string name="pick_up_order">Pickup order</string>
+    <string name="send_address">send address</string>
+    <string name="receive_address">receive address</string>
+    <string name="get_user_data">Get user data</string>
 </resources>

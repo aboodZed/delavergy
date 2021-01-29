@@ -1,9 +1,10 @@
 package com.webapp.delavergy.utils.location.locationHelper;
 
 /**
- * Created by Vishal on 10/20/2018.
+ * Updated by Abd ulla on 1/28/2021.
  */
 
 public interface TaskLoadedCallback {
     void onTaskDone(Object... values);
+    void setDistance(String o);
 }

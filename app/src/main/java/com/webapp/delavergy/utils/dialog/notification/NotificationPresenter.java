@@ -4,11 +4,9 @@ import android.app.Activity;
 
 import com.webapp.delavergy.models.Notifications;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.RequestListener;
-
-import java.util.ArrayList;
 
 public class NotificationPresenter {
 
@@ -34,7 +32,7 @@ public class NotificationPresenter {
 
                             @Override
                             public void onFail(String msg) {
-                                ToolUtils.showLongToast(activity, msg);
+                                UIUtils.showLongToast(activity, msg);
                                 dialogView.hideDialog();
                             }
                         });

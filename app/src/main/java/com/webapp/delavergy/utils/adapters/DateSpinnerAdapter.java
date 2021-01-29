@@ -7,17 +7,18 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.webapp.delavergy.R;
+import com.webapp.delavergy.utils.UIUtils;
 
 import java.util.ArrayList;
 
-public class SpinnerAdapter extends BaseAdapter implements android.widget.SpinnerAdapter {
+public class DateSpinnerAdapter extends BaseAdapter implements android.widget.SpinnerAdapter {
 
-    private ArrayList<String> items;
-    private Context context;
+   private ArrayList<Long> items;
+   private Context context;
 
-    public SpinnerAdapter(Context context, ArrayList<String> strings) {
+    public DateSpinnerAdapter(Context context, ArrayList<Long> items) {
+        this.items = items;
         this.context = context;
-        items = strings;
     }
 
     @Override
@@ -26,20 +27,20 @@ public class SpinnerAdapter extends BaseAdapter implements android.widget.Spinne
     }
 
     @Override
-    public Object getItem(int position) {
-        return items.get(position);
+    public Object getItem(int i) {
+        return items.get(i);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int i) {
+        return i;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int i, View convertView, ViewGroup viewGroup) {
         View view = View.inflate(context, R.layout.item_spinner, null);
         TextView textView = view.findViewById(R.id.tv_text);
-        textView.setText(items.get(position));
+        textView.setText(UIUtils.getDate(items.get(i)));
         return view;
     }
 }

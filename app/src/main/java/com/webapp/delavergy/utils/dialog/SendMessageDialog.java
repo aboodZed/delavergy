@@ -15,7 +15,7 @@ import androidx.fragment.app.DialogFragment;
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.models.Result;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.RequestListener;
 
 import java.util.HashMap;
@@ -23,9 +23,6 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SendMessageDialog extends DialogFragment {
 
@@ -79,9 +76,9 @@ public class SendMessageDialog extends DialogFragment {
         String subject = etEnterSubject.getText().toString().trim();
         String message = etEnterMessage.getText().toString().trim();
         HashMap<String, String> map = new HashMap<>();
-        map.put("name", AppController.getInstance().getAppLocal().getUser().getUser().getName());
+        /*map.put("name", AppController.getInstance().getAppLocal().getUser().getUser().getName());
         map.put("email", AppController.getInstance().getAppLocal().getUser().getUser().getEmail());
-        map.put("mobile", AppController.getInstance().getAppLocal().getUser().getUser().getMobile());
+        map.put("mobile", AppController.getInstance().getAppLocal().getUser().getUser().getMobile());*/
 
         if (TextUtils.isEmpty(subject)) {
             etEnterSubject.setError(getString(R.string.required_field));
@@ -105,14 +102,14 @@ public class SendMessageDialog extends DialogFragment {
                 new RequestListener<Result>() {
                     @Override
                     public void onSuccess(Result result, String msg) {
-                        ToolUtils.showLongToast(getActivity(), result.getMessage());
+                        UIUtils.showLongToast(getActivity(), result.getMessage());
                         dismiss();
                         WaitDialogFragment.newInstance("").dismiss();
                     }
 
                     @Override
                     public void onFail(String msg) {
-                        ToolUtils.showLongToast(getActivity(), msg);
+                        UIUtils.showLongToast(getActivity(), msg);
                         dismiss();
                         WaitDialogFragment.newInstance("").dismiss();
                     }

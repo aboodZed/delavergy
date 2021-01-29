@@ -1,5 +1,6 @@
 package com.webapp.delavergy.feature.main.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,7 +21,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -30,17 +29,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.webapp.delavergy.R;
+import com.webapp.delavergy.feature.main.MainActivity;
 import com.webapp.delavergy.models.Order;
+import com.webapp.delavergy.utils.AppContent;
 import com.webapp.delavergy.utils.NavigateUtils;
-import com.webapp.delavergy.utils.dialog.order.NewOrderDialogFragment;
+import com.webapp.delavergy.utils.dialog.WaitDialogFragment;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.NavigationView;
 import com.webapp.delavergy.utils.location.LocationManager;
 import com.webapp.delavergy.utils.location.locationHelper.FetchURL;
 import com.webapp.delavergy.utils.location.locationHelper.TaskLoadedCallback;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,47 +54,41 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback
     public static final int page = 201;
 
     @BindView(R.id.map_view) MapView mapView;
+
     @BindView(R.id.ll_order_recive) LinearLayout llOrderRecive;
-    @BindView(R.id.iv_way_line) ImageView ivWayLine;
     @BindView(R.id.tv_receiver_address) TextView tvReceiverAddress;
     @BindView(R.id.tv_receiver_city) TextView tvReceiverCity;
-    @BindView(R.id.tv_receiver_far) TextView tvReceiverFar;
     @BindView(R.id.tv_receiver_distance) TextView tvReceiverDistance;
-    @BindView(R.id.tv_receiver_address_2) TextView tvReceiverAddress2;
-    @BindView(R.id.tv_receiver_city_2) TextView tvReceiverCity2;
-    @BindView(R.id.tv_receiver_far_2) TextView tvReceiverFar2;
-    @BindView(R.id.tv_receiver_distance_2) TextView tvReceiverDistance2;
     @BindView(R.id.btn_accept_order) Button btnAcceptOrder;
     @BindView(R.id.btn_reject_order) Button btnRejectOrder;
 
     private GoogleMap googleMap;
     private LocationManager locationManager;
-    private boolean denialLock, orderFound;
+    private boolean denialLock;
     private Polyline currentPolyLine;
-    private NavigationView navigationView;
     private HomePresenter homePresenter;
+    private long order_id;
 
-    public static HomeFragment newInstance(NavigationView navigationView) {
-        HomeFragment fragment = new HomeFragment(navigationView);
+    public static HomeFragment newInstance(long id) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
+        args.putLong(AppContent.ORDER_Id, id);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    private HomeFragment(NavigationView navigationView) {
-        this.navigationView = navigationView;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        //argument
+        if (getArguments() != null)
+            order_id = getArguments().getLong(AppContent.ORDER_Id);
         //map
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
         //location
         locationManager = new LocationManager(this, getActivity(), this);
-        orderFound = false;
         homePresenter = new HomePresenter(getActivity(), this);
         homePresenter.tracking();
         return view;
@@ -114,9 +108,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback
 
     @Override
     public void onLocationFound(double latitude, double longitude) {
-        if (orderFound){
-            homePresenter.getOrderData();
-        }else {
+        if (order_id != 0) {
+            homePresenter.getOrderData(order_id);
+        } else {
             zoomToLocation(new LatLng(latitude, longitude));
         }
     }
@@ -159,9 +153,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback
         //clear google map
         googleMap.clear();
         //create points
-        place1 = new MarkerOptions().position(latLng1).title("مكان الأستلام")
+        place1 = new MarkerOptions().position(latLng1).title(getString(R.string.send_address))
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_truck));
-        place2 = new MarkerOptions().position(latLng2).title("مكان التسليم")
+        place2 = new MarkerOptions().position(latLng2).title(getString(R.string.receive_address))
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
         //add points
         googleMap.addMarker(place1);
@@ -171,7 +165,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback
         builder.include(place1.getPosition());
         builder.include(place2.getPosition());
         //url get route
-        String url = getUrl(place1.getPosition(), place2.getPosition(), "driving");
+        String url = locationManager.getUrl(place1.getPosition(), place2.getPosition());
         new FetchURL(this).execute(url, "driving");
         //zoom
         cu = CameraUpdateFactory.newLatLngBounds(builder.build(), 450);
@@ -188,24 +182,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback
                 .tilt(0)
                 .build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-    }
-
-    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
-        // Origin of route
-        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
-        // Destination of route
-        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
-        // Sensor enabled
-        String sensor = "sensor=false";
-        String mode = "mode=" + directionMode;
-        // Building the parameters to the web service
-        String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + mode;
-        // Output format
-        String output = "json";
-        // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters
-                + "&key=" + getString(R.string.google_maps_key);
-        return url;
     }
 
     @Override
@@ -259,29 +235,41 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback
         }
     }
 
+    @Override
+    public void setDistance(String o) {
+        tvReceiverDistance.setText(o);
+    }
+
     @OnClick(R.id.btn_accept_order)
-    public void acceptOrder(){
-        NavigateUtils.openOrder(getContext(), 1, true);
+    public void acceptOrder() {
+        homePresenter.pickOrder(order_id);
     }
 
     @OnClick(R.id.btn_reject_order)
     public void rejectOrder() {
-        navigationView.navigate(page);
+        NavigateUtils.activityIntent(getActivity(), MainActivity.class, false);
     }
 
     @Override
     public void setData(Order order) {
+        Log.e("order_data", order.toString());
+
+        tvReceiverAddress.setText(order.getSender_address());
+        tvReceiverCity.setText(order.getFrom_state().getName());
+        routeBetweenTwoPoints(new LatLng(order.getFrom_state().getLat(), order.getFrom_state().getLng())
+                , new LatLng(order.getTo_state().getLat(), order.getTo_state().getLng()));
+
+        //routeBetweenTwoPoints(new LatLng(31.5198972, 34.4457472), new LatLng(31.5242647, 34.4432764));
         llOrderRecive.setVisibility(View.VISIBLE);
-        routeBetweenTwoPoints(new LatLng(31.5198972, 34.4457472), new LatLng(31.5242647, 34.4432764));
     }
 
     @Override
     public void showDialog(String s) {
-
+        WaitDialogFragment.newInstance(s).show(getChildFragmentManager(), "");
     }
 
     @Override
     public void hideDialog() {
-
+        WaitDialogFragment.newInstance("").dismiss();
     }
 }

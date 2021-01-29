@@ -3,15 +3,12 @@ package com.webapp.delavergy.feature.password.step_two;
 import android.app.Activity;
 import android.text.TextUtils;
 
-import com.poovam.pinedittextfield.SquarePinField;
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.feature.password.step_three.ResetStepThreeFragment;
 import com.webapp.delavergy.models.LoginResult;
-import com.webapp.delavergy.models.Nothing;
 import com.webapp.delavergy.models.Verify;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
-import com.webapp.delavergy.utils.dialog.WaitDialogFragment;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.NavigationView;
 import com.webapp.delavergy.utils.listener.RequestListener;
@@ -31,7 +28,7 @@ public class ResetStepTwoPresenter {
     public void verifyCode(String code) {
 
         if (TextUtils.isEmpty(code)) {
-            ToolUtils.showShortToast(activity, activity.getString(R.string.required_field));
+            UIUtils.showShortToast(activity, activity.getString(R.string.required_field));
             return;
         }
 
@@ -52,7 +49,7 @@ public class ResetStepTwoPresenter {
                     @Override
                     public void onFail(String msg) {
                         dialogView.hideDialog();
-                        ToolUtils.showLongToast(activity, msg);
+                        UIUtils.showLongToast(activity, msg);
                     }
                 }
         );

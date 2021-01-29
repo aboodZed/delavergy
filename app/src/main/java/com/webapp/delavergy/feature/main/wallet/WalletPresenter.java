@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.webapp.delavergy.models.Wallets;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.RequestListener;
 
@@ -30,7 +30,7 @@ class WalletPresenter {
 
                     @Override
                     public void onFail(String msg) {
-                        ToolUtils.showLongToast(activity, msg);
+                        UIUtils.showLongToast(activity, msg);
                         dialogView.hideDialog();
                     }
                 });

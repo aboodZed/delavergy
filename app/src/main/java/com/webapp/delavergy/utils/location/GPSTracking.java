@@ -60,7 +60,7 @@ public class GPSTracking {
                         myLocation.setName(AppController.getInstance().getAppLocal().getUser().getUser().getName());
                         myLocation.setMobile(AppController.getInstance().getAppLocal().getUser().getUser().getMobile());
                         myLocation.setDriver_id(AppController.getInstance().getAppLocal().getUser().getUser().getId());
-                        myLocation.setStatus(AppContent.DRIVER_STATUS_ONLINE);
+                        myLocation.setStatus(AppController.getInstance().getAppLocal().getUserStatus());
                         db.setValue(myLocation);
                     } else {
                         lm.removeUpdates(locationListener);

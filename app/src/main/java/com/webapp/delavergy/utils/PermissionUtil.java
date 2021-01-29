@@ -19,7 +19,7 @@ public class PermissionUtil {
     }
 
     public static boolean isPermissionGranted(String permission, Context context) {
-        return ContextCompat.checkSelfPermission(context, permission)
+        return ActivityCompat.checkSelfPermission(context, permission)
                 == PackageManager.PERMISSION_GRANTED;
     }
 }

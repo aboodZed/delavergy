@@ -25,6 +25,10 @@ public class User {
     @Expose
     private String active;
 
+    @SerializedName("address")
+    @Expose
+    private String address;
+
     @SerializedName("is_online")
     @Expose
     private String is_online;
@@ -95,6 +99,10 @@ public class User {
         if (active.equals("0"))
             return false;
         return true;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public boolean getIs_online() {
@@ -169,9 +177,12 @@ public class User {
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", active='" + active + '\'' +
+                ", address='" + address + '\'' +
                 ", is_online='" + is_online + '\'' +
                 ", is_documented='" + is_documented + '\'' +
                 ", fcm_token='" + fcm_token + '\'' +
+                ", vehicle_type='" + vehicle_type + '\'' +
+                ", vehicle_plate='" + vehicle_plate + '\'' +
                 ", avatar_url='" + avatar_url + '\'' +
                 ", Insurance_license_url='" + Insurance_license_url + '\'' +
                 ", drive_license_url='" + drive_license_url + '\'' +

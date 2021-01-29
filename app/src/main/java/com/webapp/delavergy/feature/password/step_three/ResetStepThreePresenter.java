@@ -5,11 +5,9 @@ import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.webapp.delavergy.R;
-import com.webapp.delavergy.models.Nothing;
 import com.webapp.delavergy.models.Result;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
-import com.webapp.delavergy.utils.dialog.WaitDialogFragment;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.NavigationView;
 import com.webapp.delavergy.utils.listener.RequestListener;
@@ -65,14 +63,14 @@ public class ResetStepThreePresenter {
                     @Override
                     public void onSuccess(Result result, String msg) {
                         dialogView.hideDialog();
-                        ToolUtils.showLongToast(activity, result.getMessage());
+                        UIUtils.showLongToast(activity, result.getMessage());
                         navigationView.navigate(0);
                     }
 
                     @Override
                     public void onFail(String msg) {
                         dialogView.hideDialog();
-                        ToolUtils.showLongToast(activity, msg);
+                        UIUtils.showLongToast(activity, msg);
                     }
                 });
     }

@@ -7,20 +7,20 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.webapp.delavergy.R;
-import com.webapp.delavergy.models.Order;
 import com.webapp.delavergy.models.Orders;
 import com.webapp.delavergy.utils.AppContent;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
+import com.webapp.delavergy.utils.adapters.DateSpinnerAdapter;
 import com.webapp.delavergy.utils.adapters.OrdersAdapter;
 import com.webapp.delavergy.utils.adapters.SpinnerAdapter;
 import com.webapp.delavergy.utils.dialog.WaitDialogFragment;
@@ -48,11 +48,11 @@ public class OrdersFragment extends Fragment implements DialogView<Orders> {
     @BindView(R.id.v_f_order_line) View vFOrderLine;
     @BindView(R.id.rv_orders) RecyclerView rvOrders;
 
-    private SpinnerAdapter orderTypes, orderDates;
+    private SpinnerAdapter orderTypes;
+    private DateSpinnerAdapter orderDates;
     private OrdersPresenter presenter;
-
-    private OrdersFragment() {
-    }
+    private OrdersAdapter ordersAdapter;
+    private Orders orders;
 
     public static OrdersFragment newInstance() {
         OrdersFragment fragment = new OrdersFragment();
@@ -67,53 +67,65 @@ public class OrdersFragment extends Fragment implements DialogView<Orders> {
         //ButterKnife
         ButterKnife.bind(this, view);
         //presenter
+        initTypeSpinner();
         presenter = new OrdersPresenter(getActivity(), this);
-        presenter.getOrders();
+        filterOrders();
         //init
-        processingOrders();
         return view;
     }
 
-    public void initSpinner(Orders orders) {
+    public void initTypeSpinner() {
         //types
         ArrayList<String> types = new ArrayList<>();
-        types.add(getString(R.string.all_orders));
-        types.add(getString(R.string.liaison_officer));
+        //types.add(getString(R.string.all_orders));
         types.add(getString(R.string.administrative));
+        types.add(getString(R.string.liaison_officer));
         orderTypes = new SpinnerAdapter(getContext(), types);
         spOrderType.setAdapter(orderTypes);
+    }
+
+    public void initSpinner(Orders orders) {
         //dates
-        ArrayList<String> dates = new ArrayList<>();
-        for (int i = 0; i < orders.getOrders().size(); i++) {
-            if (!dates.contains(ToolUtils.getDate(orders.getOrders().get(i).getCreate_at()))) {
-                dates.add(ToolUtils.getDate(orders.getOrders().get(i).getCreate_at()));
+        ArrayList<Long> dates = new ArrayList<>();
+        for (int i = 0; i < orders.getPrevious_orders().size(); i++) {
+            if (!dates.contains(orders.getPrevious_orders().get(i).getCreated_timestamp())) {
+                dates.add(orders.getPrevious_orders().get(i).getCreated_timestamp());
             }
         }
-        orderDates = new SpinnerAdapter(getContext(), dates);
+
+        for (int i = 0; i < orders.getCurrent_orders().size(); i++) {
+            if (!dates.contains(orders.getCurrent_orders().get(i).getCreated_timestamp())) {
+                dates.add(orders.getCurrent_orders().get(i).getCreated_timestamp());
+            }
+        }
+        //dates.add((long) 1611863511);
+        orderDates = new DateSpinnerAdapter(getContext(), dates);
         spDate.setAdapter(orderDates);
     }
 
-    private void initRecycle(Orders orders) {
-        OrdersAdapter ordersAdapter = new OrdersAdapter(getActivity());
+    private void initRecycle() {
+        ordersAdapter = new OrdersAdapter(getActivity());
         rvOrders.setLayoutManager(new LinearLayoutManager(getContext()));
         rvOrders.setItemAnimator(new DefaultItemAnimator());
         rvOrders.setAdapter(ordersAdapter);
-        //test
-        /*ArrayList<Order> orders = new ArrayList<>();
-        orders.add(new Order(1, 122344, "جاري", "طلب ضابط ارتباط"));
-        orders.add(new Order(2, 112221, "منتهي", "طلب اداري"));
-        orders.add(new Order(3, 122313, "منتهي", "طلب ضابط ارتباط"));*/
-        ordersAdapter.setAll(orders.getOrders());
+        processingOrders();
     }
 
     @OnClick(R.id.ll_processing_orders)
     public void processingOrders() {
         getOrders(AppContent.processing_orders);
+        ordersAdapter.setAll(orders.getCurrent_orders());
     }
 
     @OnClick(R.id.ll_finished_orders)
     public void finishedOrders() {
         getOrders(AppContent.finished_orders);
+        ordersAdapter.setAll(orders.getPrevious_orders());
+    }
+
+    @OnClick(R.id.btn_filter)
+    public void filter() {
+        filterOrders();
     }
 
     private void getOrders(String s) {
@@ -135,8 +147,9 @@ public class OrdersFragment extends Fragment implements DialogView<Orders> {
 
     @Override
     public void setData(Orders orders) {
+        this.orders = orders;
         initSpinner(orders);
-        initRecycle(orders);
+        initRecycle();
     }
 
     @Override
@@ -147,5 +160,22 @@ public class OrdersFragment extends Fragment implements DialogView<Orders> {
     @Override
     public void hideDialog() {
         WaitDialogFragment.newInstance("").dismiss();
+    }
+
+    private void filterOrders() {
+        String type = (String) spOrderType.getSelectedItem();
+        if (type.equals(getString(R.string.administrative))) {
+            type = AppContent.ORDER_TYPE_MANAGEMENT;
+        } else {
+            type = AppContent.ORDER_TYPE_OFFICER;
+        }
+
+        if (spDate.getSelectedItem() == null) {
+            presenter.getFilterOrders("delivery/ordersList");
+        } else {
+            long timestamp = (Long) spDate.getSelectedItem();
+            //Log.e("testtotime", "date : " + timestamp);
+            presenter.getFilterOrders("delivery/ordersList?date=" + timestamp + "&type=" + type);
+        }
     }
 }

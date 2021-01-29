@@ -1,6 +1,7 @@
 package com.webapp.delavergy.utils.adapters;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.models.Order;
+import com.webapp.delavergy.utils.AppContent;
+import com.webapp.delavergy.utils.AppController;
 import com.webapp.delavergy.utils.NavigateUtils;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersHold
 
     private Activity activity;
     private ArrayList<Order> orders = new ArrayList<>();
-    private ArrayList<Order> all = new ArrayList<>();
 
     public OrdersAdapter(Activity activity) {
         this.activity = activity;
@@ -49,14 +51,24 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersHold
     }
 
     public void setAll(ArrayList<Order> all) {
-        this.all = all;
-        this.orders = all;
+        orders.clear();
+        this.orders.addAll(all);
         notifyDataSetChanged();
     }
 
-    public void filter(String type, String date) {
-
-    }
+   /*   public void filter(String type, String date, String status) {
+      orders.clear();
+        notifyDataSetChanged();
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).getType().equals(type)
+                    && UIUtils.getDate(all.get(i).getCreated_timestamp()).equals(date)
+                    && all.get(i).getStatus().equals(status)) {
+                Log.e(getClass().getName() + ": status", "true");
+                orders.add(all.get(i));
+                notifyItemInserted(orders.size() - 1);
+            }
+        }
+    }*/
 
     class OrdersHolder extends RecyclerView.ViewHolder {
 
@@ -75,11 +87,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersHold
 
         public void setData(Order order) {
             this.order = order;
-            tvDateTime.setText(ToolUtils.getDate(order.getCreate_at()) + "\n" +
-                    ToolUtils.getTime(order.getCreate_at()));
-            tvOrderId.setText(String.valueOf(order.getId()));
-            tvOrderStatus.setText(order.getStatus());
-            tvOrderType.setText(order.getType());
+            tvDateTime.setText(UIUtils.getDate(order.getCreated_timestamp()) + "\n" +
+                    UIUtils.getTime(order.getCreated_timestamp()));
+            tvOrderId.setText("#" + order.getInvoice_number());
+            tvOrderStatus.setText(order.getStatus_translation());
+            tvOrderType.setText(order.getType_translation());
         }
 
         @OnClick(R.id.cl_background)

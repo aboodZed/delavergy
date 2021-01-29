@@ -12,9 +12,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Task;
 import com.webapp.delavergy.R;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 
 /**
  * Utility class to ask for location services
@@ -64,7 +65,7 @@ class LocationServicesManager {
 
     // Get location services the old fashioned way
     protected void openLocationSettings() {
-        ToolUtils.showLongToast(activity, activity.getString(R.string.turn_on_location_services));
+        UIUtils.showLongToast(activity, activity.getString(R.string.turn_on_location_services));
         activity.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
     }
 }

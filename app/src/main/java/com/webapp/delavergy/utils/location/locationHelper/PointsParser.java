@@ -1,6 +1,5 @@
 package com.webapp.delavergy.utils.location.locationHelper;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -15,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Vishal on 10/20/2018.
+ * Updated by Abd ulla on 1/28/2021.
  */
 
 public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
@@ -30,7 +29,6 @@ public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<S
     // Parsing the data in non-ui thread
     @Override
     protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
-
         JSONObject jObject;
         List<List<HashMap<String, String>>> routes = null;
 
@@ -44,7 +42,7 @@ public class PointsParser extends AsyncTask<String, Integer, List<List<HashMap<S
             routes = parser.parse(jObject);
             Log.d("mylog", "Executing routes");
             Log.d("mylog", routes.toString());
-
+            taskCallback.setDistance(parser.getDistance(jObject));
         } catch (Exception e) {
             Log.d("mylog", e.toString());
             e.printStackTrace();

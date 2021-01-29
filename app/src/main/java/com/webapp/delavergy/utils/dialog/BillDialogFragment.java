@@ -14,22 +14,30 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.webapp.delavergy.R;
+import com.webapp.delavergy.models.Result;
+import com.webapp.delavergy.utils.AppController;
+import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.RequestListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BillDialogFragment extends BottomSheetDialogFragment {
+public class BillDialogFragment extends BottomSheetDialogFragment implements DialogView<Boolean> {
+
+    private static final String DELIVARY_COST_KEY = "cost";
+    private static final String ORDER_ID_KEY = "id";
 
     @BindView(R.id.tv_value) TextView tvValue;
     @BindView(R.id.btn_attainment) Button tvAttainment;
 
     private RequestListener<Boolean> requestListener;
 
-    public static BillDialogFragment newInstance() {
+    public static BillDialogFragment newInstance(long id, double delivaryCost) {
         final BillDialogFragment fragment = new BillDialogFragment();
         final Bundle args = new Bundle();
+        args.putDouble(DELIVARY_COST_KEY, delivaryCost);
+        args.putLong(ORDER_ID_KEY, id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,6 +47,7 @@ public class BillDialogFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_fragment_bill, container, false);
         ButterKnife.bind(this, view);
+        tvValue.setText("" + getArguments().getDouble(DELIVARY_COST_KEY));
         return view;
     }
 
@@ -66,7 +75,38 @@ public class BillDialogFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.btn_attainment)
     public void attainment() {
-        requestListener.onSuccess(true,"");
-        dismiss();
+        showDialog(getString(R.string.delivery_order));
+        AppController.getInstance().getGetAPIData().getOrderData()
+                .deliveredOrder(getActivity(), getArguments().getLong(ORDER_ID_KEY)
+                        , new RequestListener<Result>() {
+                            @Override
+                            public void onSuccess(Result result, String msg) {
+                                requestListener.onSuccess(true, "");
+                                hideDialog();
+                                dismiss();
+                            }
+
+                            @Override
+                            public void onFail(String msg) {
+                                requestListener.onFail(msg);
+                                hideDialog();
+                                dismiss();
+                            }
+                        });
+    }
+
+    @Override
+    public void setData(Boolean aBoolean) {
+
+    }
+
+    @Override
+    public void showDialog(String s) {
+        WaitDialogFragment.newInstance(s).show(getChildFragmentManager(), "");
+    }
+
+    @Override
+    public void hideDialog() {
+        WaitDialogFragment.newInstance("").dismiss();
     }
 }

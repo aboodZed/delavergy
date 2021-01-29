@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Vishal on 10/20/2018.
+ * Updated by Abd ulla on 1/28/2021.
  */
 
 public class FetchURL extends AsyncTask<String, Void, String> {

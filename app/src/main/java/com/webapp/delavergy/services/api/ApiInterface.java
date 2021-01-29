@@ -4,6 +4,8 @@ import com.webapp.delavergy.models.Code;
 import com.webapp.delavergy.models.LoginResult;
 import com.webapp.delavergy.models.Nothing;
 import com.webapp.delavergy.models.Notifications;
+import com.webapp.delavergy.models.Order;
+import com.webapp.delavergy.models.OrderData;
 import com.webapp.delavergy.models.Orders;
 import com.webapp.delavergy.models.Privacy;
 import com.webapp.delavergy.models.Result;
@@ -17,8 +19,10 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 public interface ApiInterface {
 
@@ -64,15 +68,30 @@ public interface ApiInterface {
     Call<Notifications> getNotification();
 
     @POST("fcmToken")
-    Call<String> sendFcmToken(@Query("token") String token);
+    Call<Result> sendFcmToken(@Query("token") String token);
 
     @POST("contact")
     Call<Result> contactUs(@QueryMap Map<String, String> map);
 
     //order
-    @GET("delivery/myOrders")
-    Call<Orders> getOrders();
+    /*@GET("delivery/myOrders")
+    Call<Orders> getOrders();*/
 
-    @GET("delivery/walletDetails")
+    @GET
+    Call<Orders> getFilterOrders(@Url String url);
+
+    @GET("delivery/order/{id}")
+    Call<OrderData> getOrderDetails(@Path("id") long id);
+
+    @POST("delivery/markOrderDelivered")
+    Call<Result> pickOrder(@Query("order_id") long order_id);
+
+    @POST("delivery/markOrderDelivered")
+    Call<Result> deliveredOrder(@Query("order_id") long order_id);
+
+    //wellet
+    @GET("delivery/wallet")
     Call<Wallets> getWallets();
+
+
 }

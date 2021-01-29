@@ -25,14 +25,21 @@ import butterknife.OnClick;
 
 public class PrivacyFragment extends DialogFragment implements DialogView<Privacy> {
 
+    private static final String PRIVACY_KEY = "privacy";
+
     @BindView(R.id.iv_back) ImageView ivBack;
     @BindView(R.id.iv_notification) ImageView ivNotification;
     @BindView(R.id.tv_privacy) TextView tvPrivacy;
     @BindView(R.id.fl_load) FrameLayout flLoad;
+
     private PrivacyPresenter presenter;
 
-    public static PrivacyFragment newInstance() {
-        return new PrivacyFragment();
+    public static PrivacyFragment newInstance(String privacy) {
+        PrivacyFragment privacyFragment = new PrivacyFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(PRIVACY_KEY, privacy);
+        privacyFragment.setArguments(bundle);
+        return privacyFragment;
     }
 
     @Override
@@ -46,6 +53,8 @@ public class PrivacyFragment extends DialogFragment implements DialogView<Privac
         View v = inflater.inflate(R.layout.fragment_privacy, container, false);
         ButterKnife.bind(this, v);
         presenter = new PrivacyPresenter(getActivity(), this);
+        tvPrivacy.setText(getArguments().getString(PRIVACY_KEY));
+        hideDialog();
         return v;
     }
 

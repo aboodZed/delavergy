@@ -3,20 +3,20 @@ package com.webapp.delavergy.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Settings {
+public class OrderData extends Result{
 
-    @SerializedName("settings")
+    @SerializedName("order")
     @Expose
-    private Setting setting;
+    private Order order;
 
-    public Setting getSetting() {
-        return setting;
+    public Order getOrder() {
+        return order;
     }
 
     @Override
     public String toString() {
-        return "Settings{" +
-                "setting=" + setting +
+        return "OrderData{" +
+                "order=" + order +
                 '}';
     }
 }

@@ -12,17 +12,21 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.webapp.delavergy.R;
+import com.webapp.delavergy.models.LoginResult;
 import com.webapp.delavergy.models.User;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.ImageUtils;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.dialog.ChangePasswordDialog;
+import com.webapp.delavergy.utils.dialog.WaitDialogFragment;
+import com.webapp.delavergy.utils.listener.DialogView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements DialogView<User> {
 
     public static final int page = 205;
 
@@ -62,8 +66,7 @@ public class ProfileFragment extends Fragment {
         //ButterKnife
         ButterKnife.bind(this, view);
         //presenter
-        profilePresenter = new ProfilePresenter(getActivity());
-        setData();
+        profilePresenter = new ProfilePresenter(getActivity(), this);
         return view;
     }
 
@@ -72,15 +75,20 @@ public class ProfileFragment extends Fragment {
         ChangePasswordDialog.newInstance().show(getChildFragmentManager(), "");
     }
 
-    public void setData() {
-        User user = AppController.getInstance().getAppLocal().getUser().getUser();
-        ToolUtils.loadImageNormal(getActivity(), pbAvatar, user.getAvatar_url(), ivAvatar);
-        ToolUtils.loadImageNormal(getActivity(), null, user.getId_pic_url(), ivId);
-        ToolUtils.loadImageNormal(getActivity(), null, user.getVehicle_pic_url(), ivVehicleImg);
-        ToolUtils.loadImageNormal(getActivity(), null, user.getVehicle_license_url(), ivVehicleLicense);
-        ToolUtils.loadImageNormal(getActivity(), null, user.getDrive_license_url(), ivDrivingLicense);
-        ToolUtils.loadImageNormal(getActivity(), null, user.getInsurance_license_url(), ivInsuranceImg);
-        //ToolUtils.loadImageNormal(getActivity(), null, user.getAvatar_url(), ivCreditNote);
+    @Override
+    public void setData(User user) {
+        //update User
+        LoginResult lr = AppController.getInstance().getAppLocal().getUser();
+        lr.setUser(user);
+        AppController.getInstance().getAppLocal().setUser(lr);
+
+        ImageUtils.loadImageNormal(getActivity(), pbAvatar, user.getAvatar_url(), ivAvatar);
+        ImageUtils.loadImageNormal(getActivity(), null, user.getId_pic_url(), ivId);
+        ImageUtils.loadImageNormal(getActivity(), null, user.getVehicle_pic_url(), ivVehicleImg);
+        ImageUtils.loadImageNormal(getActivity(), null, user.getVehicle_license_url(), ivVehicleLicense);
+        ImageUtils.loadImageNormal(getActivity(), null, user.getDrive_license_url(), ivDrivingLicense);
+        ImageUtils.loadImageNormal(getActivity(), null, user.getInsurance_license_url(), ivInsuranceImg);
+        //UIUtils.loadImageNormal(getActivity(), null, user.getAvatar_url(), ivCreditNote);
 
         etFullName.setText(user.getName());
         etPhone.setText(user.getMobile());
@@ -90,5 +98,15 @@ public class ProfileFragment extends Fragment {
         //etFinishedLicense.setText(user.getName());
         //etCity.setText(user.getName());
         //etNeighborhood.setText(user.getName());
+    }
+
+    @Override
+    public void showDialog(String s) {
+        WaitDialogFragment.newInstance(s).show(getChildFragmentManager(), "");
+    }
+
+    @Override
+    public void hideDialog() {
+        WaitDialogFragment.newInstance("").dismiss();
     }
 }

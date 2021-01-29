@@ -13,4 +13,18 @@ public interface AppContent {
     String DRIVER_STATUS_BUSY = "busy";
     String DRIVER_STATUS_ONLINE = "online";
     String DRIVER_STATUS_OFFLINE = "offline";
+
+    String ORDER_STATUS_COMPLETE = "complete";
+    String ORDER_STATUS_PROCESSING = "processing";
+
+    String ORDER_TYPE_MANAGEMENT = "management";
+    String ORDER_TYPE_OFFICER = "officer";
+
+    int PHONE_CALL_CODE = 1000;
+
+    //FIREBASE
+    String FIREBASE_MESSAGE = "message";
+    String FIREBASE_DATA_BODY = "data";
+    String NOTIFICATION_TYPE = "type";
+    String NOTIFICATION_MESSAGE = "msg";
 }

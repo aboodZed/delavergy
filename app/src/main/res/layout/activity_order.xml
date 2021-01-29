@@ -23,8 +23,7 @@
             <TextView
                 android:id="@+id/tv_order_id"
                 style="@style/mediumTextViewStyle"
-                android:layout_marginBottom="@dimen/margin"
-                android:text="لرقم المرجعي" />
+                android:layout_marginBottom="@dimen/margin" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -129,14 +128,15 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/address_text"
                         style="@style/SmallTextViewStyle"
                         android:layout_weight="1"
-                        android:text="@string/receive_address"
+                        android:text="@string/sender_address"
                         android:textAlignment="viewStart"
                         android:textColor="@color/darkGray" />
 
                     <TextView
-                        android:id="@+id/tv_receiver_address_text"
+                        android:id="@+id/tv_sender_address_text"
                         style="@style/SmallTextViewStyle"
                         android:layout_weight="1"
                         android:textAlignment="viewEnd" />
@@ -158,12 +158,12 @@
                     <TextView
                         style="@style/SmallTextViewStyle"
                         android:layout_weight="1"
-                        android:text="@string/receive_address"
+                        android:text="@string/receiver_address"
                         android:textAlignment="viewStart"
                         android:textColor="@color/darkGray" />
 
                     <TextView
-                        android:id="@+id/tv_receiver_address_text_2"
+                        android:id="@+id/tv_receiver_address_text"
                         style="@style/SmallTextViewStyle"
                         android:layout_weight="1"
                         android:textAlignment="viewEnd" />
@@ -197,7 +197,6 @@
                     style="@style/SmallTextViewStyle"
                     android:layout_gravity="start"
                     android:layout_marginTop="@dimen/small_margin"
-                    android:text="@string/order_details"
                     android:textColor="@color/darkGray" />
 
             </LinearLayout>

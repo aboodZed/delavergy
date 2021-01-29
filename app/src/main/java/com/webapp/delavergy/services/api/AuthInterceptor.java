@@ -29,10 +29,6 @@ public class AuthInterceptor implements Interceptor {
         if (response.code() == 401) {
             NavigateUtils.activityIntent(context, LoginActivity.class, true);
         }
-
-        if (!response.isSuccessful()) {
-            return null;
-        }
         return response;
     }
 }

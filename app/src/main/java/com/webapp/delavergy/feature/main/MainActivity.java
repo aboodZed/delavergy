@@ -1,13 +1,12 @@
 package com.webapp.delavergy.feature.main;
 
-import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
@@ -17,14 +16,17 @@ import com.webapp.delavergy.feature.main.home.HomeFragment;
 import com.webapp.delavergy.feature.main.orders.OrdersFragment;
 import com.webapp.delavergy.feature.main.profile.ProfileFragment;
 import com.webapp.delavergy.feature.main.wallet.WalletFragment;
-import com.webapp.delavergy.feature.password.step_one.ResetStepOneFragment;
 import com.webapp.delavergy.models.Result;
 import com.webapp.delavergy.utils.AppContent;
+import com.webapp.delavergy.utils.AppController;
 import com.webapp.delavergy.utils.NavigateUtils;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.dialog.notification.NotificationFragment;
 import com.webapp.delavergy.utils.language.BaseActivity;
 import com.webapp.delavergy.utils.listener.DialogView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -52,6 +54,8 @@ public class MainActivity extends BaseActivity implements DialogView<Result> {
 
     private MainPresenter presenter;
 
+    private int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setLayoutRes(R.layout.activity_main);
@@ -62,10 +66,32 @@ public class MainActivity extends BaseActivity implements DialogView<Result> {
     }
 
     private void initFragment() {
-        if (getIntent().getExtras() != null) {
-            navigate(getIntent().getExtras().getInt(AppContent.PAGE));
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String message = bundle.getString(AppContent.FIREBASE_MESSAGE);
+            getMessageNotification(message);
+
+            if (bundle.getInt(AppContent.PAGE) != 0) {
+                navigate(bundle.getInt(AppContent.PAGE));
+            } else {
+                navigate(HomeFragment.page);
+            }
         } else {
             navigate(HomeFragment.page);
+        }
+    }
+
+    private void getMessageNotification(String message) {
+        try {
+            JSONObject body = new JSONObject(message).getJSONObject(AppContent.FIREBASE_DATA_BODY);
+
+            id = body.getInt(AppContent.ORDER_Id);
+            String type = body.getString(AppContent.NOTIFICATION_TYPE);
+            String msg = body.getString(AppContent.NOTIFICATION_MESSAGE);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("error", "" + e.getMessage());
         }
     }
 
@@ -121,7 +147,8 @@ public class MainActivity extends BaseActivity implements DialogView<Result> {
         tvProfile.setTextColor(getColor(R.color.darkGray));
         switch (page) {
             case HomeFragment.page:
-                homeFragment = HomeFragment.newInstance(this::navigate);
+                homeFragment = HomeFragment.newInstance(id);
+                id = 0;
                 tvHome.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_home, 0, 0);
                 tvHome.setTextColor(getColor(R.color.colorAccent));
                 NavigateUtils.replaceFragment(getSupportFragmentManager(), homeFragment, R.id.fl_container);
@@ -164,13 +191,20 @@ public class MainActivity extends BaseActivity implements DialogView<Result> {
 
     @Override
     public void setData(Result result) {
-        ToolUtils.showLongToast(this, result.getMessage());
+        UIUtils.showLongToast(this, result.getMessage());
         if (!result.isSuccess()) {
             if (scStatus.isChecked()) {
                 scStatus.setChecked(false);
             } else {
                 scStatus.setChecked(true);
             }
+        } else {
+            if (!AppController.getInstance().getAppLocal().getUserStatus().equals(AppContent.DRIVER_STATUS_BUSY))
+                if (scStatus.isChecked()) {
+                    AppController.getInstance().getAppLocal().setUserStatus(AppContent.DRIVER_STATUS_ONLINE);
+                } else {
+                    AppController.getInstance().getAppLocal().setUserStatus(AppContent.DRIVER_STATUS_OFFLINE);
+                }
         }
     }
 

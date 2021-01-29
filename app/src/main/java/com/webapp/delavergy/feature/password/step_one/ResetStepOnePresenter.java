@@ -2,16 +2,13 @@ package com.webapp.delavergy.feature.password.step_one;
 
 import android.app.Activity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.feature.password.step_two.ResetStepTwoFragment;
 import com.webapp.delavergy.models.Code;
-import com.webapp.delavergy.models.Nothing;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
-import com.webapp.delavergy.utils.dialog.WaitDialogFragment;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.NavigationView;
 import com.webapp.delavergy.utils.listener.RequestListener;
@@ -46,7 +43,7 @@ public class ResetStepOnePresenter {
                     @Override
                     public void onSuccess(Code code, String msg) {
                         dialogView.hideDialog();
-                        ToolUtils.showLongToast(activity, code.getCode() + "");
+                        UIUtils.showLongToast(activity, code.getCode() + "");
                         AppController.getInstance().getAppLocal().setMobile(phone);
                         navigationView.navigate(ResetStepTwoFragment.page);
                     }
@@ -54,7 +51,7 @@ public class ResetStepOnePresenter {
                     @Override
                     public void onFail(String msg) {
                         dialogView.hideDialog();
-                        ToolUtils.showLongToast(activity, msg);
+                        UIUtils.showLongToast(activity, msg);
                     }
                 });
     }

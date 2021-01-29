@@ -92,7 +92,6 @@ public class NewOrderDialogFragment extends DialogFragment {
 
 
     private void setData() {
-        listener.setData(new Order(3, 122313, "منتهي", "طلب ضابط ارتباط"));
     }
 
     public void setListener(NewOrderDialogFragmentListener listener) {
@@ -100,7 +99,6 @@ public class NewOrderDialogFragment extends DialogFragment {
     }
 
    public interface NewOrderDialogFragmentListener{
-       void setData(Order order);
        void reject();
     }
 }

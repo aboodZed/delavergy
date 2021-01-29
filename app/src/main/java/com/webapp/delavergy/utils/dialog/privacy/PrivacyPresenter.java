@@ -5,7 +5,7 @@ import android.app.Activity;
 import com.webapp.delavergy.R;
 import com.webapp.delavergy.models.Privacy;
 import com.webapp.delavergy.utils.AppController;
-import com.webapp.delavergy.utils.ToolUtils;
+import com.webapp.delavergy.utils.UIUtils;
 import com.webapp.delavergy.utils.listener.DialogView;
 import com.webapp.delavergy.utils.listener.RequestListener;
 
@@ -17,7 +17,7 @@ class PrivacyPresenter {
     public PrivacyPresenter(Activity activity, DialogView<Privacy> dialogView) {
         this.activity = activity;
         this.dialogView = dialogView;
-        getData();
+        //getData();
     }
 
     private void getData() {
@@ -32,7 +32,7 @@ class PrivacyPresenter {
 
                     @Override
                     public void onFail(String msg) {
-                        ToolUtils.showLongToast(activity, msg);
+                        UIUtils.showLongToast(activity, msg);
                         dialogView.hideDialog();
                     }
                 });

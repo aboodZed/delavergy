@@ -43,7 +43,6 @@
                 android:id="@+id/tv_receiver_address"
                 style="@style/SmallTextViewStyle"
                 android:layout_marginStart="@dimen/small_margin"
-                android:text="@string/receive_address"
                 app:layout_constraintStart_toEndOf="@+id/iv_way_line"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +50,6 @@
                 android:id="@+id/tv_receiver_city"
                 style="@style/SmallTextViewStyle"
                 android:layout_marginStart="@dimen/margin"
-                android:text="@string/city"
                 app:layout_constraintEnd_toStartOf="@+id/tv_receiver_far"
                 app:layout_constraintStart_toEndOf="@+id/tv_receiver_address"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +65,6 @@
             <TextView
                 android:id="@+id/tv_receiver_distance"
                 style="@style/SmallTextViewStyle"
-                android:text="30km"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -58,13 +58,17 @@ public class WalletFragment extends Fragment implements DialogView<Wallets> {
         rvWallet.setLayoutManager(new LinearLayoutManager(getContext()));
         rvWallet.setItemAnimator(new DefaultItemAnimator());
         rvWallet.setAdapter(walletAdapter);
-        walletAdapter.setWallets(wallets.getWallets());
+        walletAdapter.setWallets(wallets.getWallet_details());
     }
 
     @Override
     public void setData(Wallets wallets) {
         initRecycle(wallets);
-        tvTotalBalance.setText(wallets.getTotal_wallet() + "");
+        tvTotalBalance.setText(wallets.getWallet() + "");
+        tvYourPercentageOfOrders.setText(wallets.getApp_commission() + "");
+        tvTotalDeliveryValue.setText(wallets.getTotal_delivery_cost() + "");
+        tvCaptainDues.setText(wallets.getTotal_driver_revenue() + "");
+        tvCompanyDues.setText(wallets.getApp_revenue() + "");
     }
 
     @Override
